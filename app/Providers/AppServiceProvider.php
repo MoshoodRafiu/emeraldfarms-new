@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Investment;
 use App\MilestoneInvestment;
-use App\PaidMilestone;
+use App\PaidMileStone;
 use App\Transaction;
 use App\Wallet;
 use App\Observers\InvestmentObserver;
@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Investment::observe(InvestmentObserver::class);
         MilestoneInvestment::observe(MilestoneInvestmentObserver::class);
-        PaidMilestone::observe(PaidMilestoneObserver::class);
+        PaidMileStone::observe(PaidMilestoneObserver::class);
         Transaction::observe(TransactionObserver::class);
         Wallet::observe(WalletObserver::class);
     }
