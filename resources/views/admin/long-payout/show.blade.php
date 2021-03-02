@@ -9,10 +9,9 @@
 @section('title') Investments @endsection
 
 @section('content')
-
     <div class="section-body">
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
                         <h4>Milestone</h4>
@@ -22,9 +21,11 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>
-                                    <th>Milestone</th>
+                                    <th>#</th>
+                                    <th>Date</th>
                                     <th>Amount</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -34,12 +35,14 @@
                                         @php $nextDate = $date @endphp
                                     @endif
                                     <tr>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>
                                             {{$date}}
                                         </td>
                                         <td>
                                             @if ($loop->last)
-                                                NGN {{number_format(implode("", explode(',',$investment->amount_invested))+implode("", explode(',',$investment->milestoneReturns())))}}
+                                                NGN{{number_format(implode("", explode(',',$investment->amount_invested))+implode("", explode(',',$investment->milestoneReturns())),2)}}
+                                                
                                                 @php $lastDate = $date @endphp
                                             @else
                                                 NGN{{number_format(implode("", explode(',',$investment->milestoneReturns())),2)}}
@@ -47,10 +50,19 @@
                                         </td>
                                         <td>
                                             @if($date->gt(now()))
-                                            <span class="badge badge-warning">Pending</span> 
+                                            <span class="badge badge-warning">Not matured</span> 
+                                            @else
+                                                @if($investment->payments()->count() >= $loop->iteration)
+                                                <span class="badge badge-success">Paid</span>
+                                                @else
+                                                <span class="badge badge-primary">Pending</span>  
+                                                @endif
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($date->gt(now()))
                                             @else
                                                 @if($investment->payments()->where('milestone', $key+1)->first())
-                                                <span class="badge badge-success">Paid</span> 
                                                 @else
                                                     @if($key == 0)
                                                     <a href="/investments/payout/approveNow/{{ $investment->id }}" class="btn btn-success" onclick="confirm('Are you sure you want to pay this milestone?');">Pay now</a> 
@@ -65,18 +77,15 @@
                                             @endif
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="section-body">
-        <div class="row">
-            <div class="col-12">
+            
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
                         <h4>General</h4>
@@ -86,52 +95,66 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>
-                                    <th>Number of Units</th>
-                                    <th>Farmlist</th>
-                                    <th>Investment Status</th>
-                                    <th>Maturity Status</th>
-                                    <th>Number of Milestones</th>
-                                    <th>Rollover</th>
+                                    <th>#</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        {{$investment->units}}
-                                    </td>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Number of Units</td>
+                                        <td>
+                                            {{$investment->units}}
+                                        </td>
+                                    </tr>
 
-                                    <td>
-                                        {{$investment->farm->title}}
-                                    </td>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Farmlist</td>
+                                        <td>
+                                            {{$investment->farm->title}}
+                                        </td>
+                                    </tr>
 
-                                    <td>
-                                        {{$investment->investmentStatus()}}
-                                    </td>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Investment Status</td>
+                                        <td>
+                                            {{$investment->investmentStatus()}}
+                                        </td>
+                                    </tr>
 
-                                    <td>
-                                        {{$investment->maturity_status}}
-                                    </td>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Maturity Status</td>
+                                        <td>
+                                            {{$investment->maturity_status}}
+                                        </td>
+                                    </tr>
 
-                                    <td>
-                                        {{$investment->farm->milestone}}
-                                    </td>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Number of Milestones</td>
+                                        <td>
+                                            {{$investment->farm->milestone}}
+                                        </td>
+                                    </tr>
 
-                                    <td>
-                                        {{$investment->rollover ? 'Yes' : 'No'}}
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Rollover</td>
+                                        <td>
+                                            {{$investment->rollover ? 'Yes' : 'No'}}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="section-body">
-        <div class="row">
-            <div class="col-12">
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
                         <h4>Funds</h4>
@@ -141,34 +164,45 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>
-                                    <th>Amount Invested</th>
-                                    <th>ROI</th>
-                                    <th>Expected returns</th>
+                                    <th>#</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <td>
-                                    NGN {{number_format(implode("", explode(',',$investment->amount_invested)),2)}}
-                                </td>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Amount Invested</td>
+                                        <td>
+                                            NGN {{ number_format(implode("", explode(',',$investment->amount_invested))) .'.00'}}
+                                        </td>
+                                    </tr>
 
-                                <td>
-                                    {{$investment->farm->interest}}%
-                                </td>
-                                <td>
-                                    NGN {{number_format(implode("", explode(',',$investment->amount_invested))+implode("", explode(',',$investment->milestoneReturns())))}}
-                                </td>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>ROI</td>
+                                        <td>
+                                            {{$investment->farm->interest}}%
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Expected returns</td>
+                                        <td>
+                                            NGN {{number_format(implode("", explode(',',$investment->amount_invested))+implode("", explode(',',$investment->milestoneReturns())))}}
+                                            
+                                        </td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="section-body">
-        <div class="row">
-            <div class="col-12">
+            
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
                         <h4>Calendar</h4>
@@ -178,27 +212,47 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>
-                                    <th>Date Created</th>
-                                    <th>Next Payment Date</th>
-                                    <th>Days Remaining</th>
-                                    <th>Total Number of Days</th>
-                                    <th>Final Date</th>
+                                    <th>#</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
+                                    <td>1</td>
+                                    <td>Date Created</td>
                                     <td>
                                         {{$investment->created_at->format('D M Y')}}
                                     </td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>Next Payment Date</td>
                                     <td>
                                         {{$nextDate}}
                                     </td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>Days Remaining</td>
                                     <td>
                                         {{$lastDate->diffInDays(now())}}
                                     </td>
+                                </tr>
+
+                                <tr>
+                                    <td>4</td>
+                                    <td>Total Number of Days</td>
                                     <td>
                                         {{$investment->getPaymentDurationInDays()}}
                                     </td>
+                                </tr>
+
+                                <tr>
+                                    <td>5</td>
+                                    <td>Final Date</td>
                                     <td>
                                         {{$lastDate}}
                                     </td>

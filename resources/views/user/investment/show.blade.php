@@ -21,7 +21,9 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>
-                                    <th>Description</th>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
@@ -32,14 +34,10 @@
                                         @php $nextDate = $date @endphp
                                     @endif
                                     <tr>
-                                        <td>Milestone</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>
                                             {{$date}}
                                         </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Amount</td>
                                         <td>
                                             @if ($loop->last)
                                                 NGN{{number_format(implode("", explode(',',$investment->amount_invested))+implode("", explode(',',$investment->milestoneReturns())),2)}}
@@ -49,12 +47,16 @@
                                                 NGN{{number_format(implode("", explode(',',$investment->milestoneReturns())),2)}}
                                             @endif
                                         </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Status</td>
                                         <td>
-                                            {{$date->gt(now()) ? 'Pending' : 'Paid'}}
+                                            @if($date->gt(now()))
+                                            <span class="badge badge-warning">Not matured</span> 
+                                            @else
+                                                @if($investment->payments()->count() >= $loop->iteration)
+                                                <span class="badge badge-success">Paid</span>
+                                                @else
+                                                <span class="badge badge-primary">Pending</span>  
+                                                @endif
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -75,12 +77,14 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Description</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>1</td>
                                         <td>Number of Units</td>
                                         <td>
                                             {{$investment->units}}
@@ -88,6 +92,7 @@
                                     </tr>
 
                                     <tr>
+                                        <td>2</td>
                                         <td>Farmlist</td>
                                         <td>
                                             {{$investment->farm->title}}
@@ -95,6 +100,7 @@
                                     </tr>
 
                                     <tr>
+                                        <td>3</td>
                                         <td>Investment Status</td>
                                         <td>
                                             {{$investment->investmentStatus()}}
@@ -102,6 +108,7 @@
                                     </tr>
 
                                     <tr>
+                                        <td>4</td>
                                         <td>Maturity Status</td>
                                         <td>
                                             {{$investment->maturity_status}}
@@ -109,6 +116,7 @@
                                     </tr>
 
                                     <tr>
+                                        <td>5</td>
                                         <td>Number of Milestones</td>
                                         <td>
                                             {{$investment->farm->milestone}}
@@ -116,6 +124,7 @@
                                     </tr>
 
                                     <tr>
+                                        <td>6</td>
                                         <td>Rollover</td>
                                         <td>
                                             {{$investment->rollover ? 'Yes' : 'No'}}
@@ -137,12 +146,14 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Description</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <td>1</td>
                                         <td>Amount Invested</td>
                                         <td>
                                             NGN {{ number_format(implode("", explode(',',$investment->amount_invested))) .'.00'}}
@@ -150,6 +161,7 @@
                                     </tr>
 
                                     <tr>
+                                        <td>2</td>
                                         <td>ROI</td>
                                         <td>
                                             {{$investment->farm->interest}}%
@@ -157,6 +169,7 @@
                                     </tr>
 
                                     <tr>
+                                        <td>3</td>
                                         <td>Expected returns</td>
                                         <td>
                                             NGN {{number_format(implode("", explode(',',$investment->amount_invested))+implode("", explode(',',$investment->milestoneReturns())))}}
@@ -181,12 +194,14 @@
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Description</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
+                                    <td>1</td>
                                     <td>Date Created</td>
                                     <td>
                                         {{$investment->created_at->format('D M Y')}}
@@ -194,6 +209,7 @@
                                 </tr>
 
                                 <tr>
+                                    <td>2</td>
                                     <td>Next Payment Date</td>
                                     <td>
                                         {{$nextDate}}
@@ -201,6 +217,7 @@
                                 </tr>
 
                                 <tr>
+                                    <td>3</td>
                                     <td>Days Remaining</td>
                                     <td>
                                         {{$lastDate->diffInDays(now())}}
@@ -208,6 +225,7 @@
                                 </tr>
 
                                 <tr>
+                                    <td>4</td>
                                     <td>Total Number of Days</td>
                                     <td>
                                         {{$investment->getPaymentDurationInDays()}}
@@ -215,6 +233,7 @@
                                 </tr>
 
                                 <tr>
+                                    <td>5</td>
                                     <td>Final Date</td>
                                     <td>
                                         {{$lastDate}}

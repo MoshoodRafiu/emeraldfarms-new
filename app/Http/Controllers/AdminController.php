@@ -34,7 +34,7 @@ use App\Mail\SendMailable;
 use Mail;
 use App\Bank;
 use App\NewsUpdate;
-use App\FarmFund;
+use App\Farmfund;
 use App\PaidMileStone;
 
 class AdminController extends Controller
