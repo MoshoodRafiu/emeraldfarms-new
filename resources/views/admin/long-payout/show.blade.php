@@ -11,7 +11,7 @@
 @section('content')
     <div class="section-body">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <h4>Milestone</h4>
@@ -85,14 +85,14 @@
                 </div>
             </div>
             
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <h4>General</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="table-1">
+                        <div class="">
+                            <table class="table table-striped" id="table-3">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -154,13 +154,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <h4>Funds</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="">
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>
@@ -202,13 +202,14 @@
                 </div>
             </div>
             
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <h4>Calendar</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="">
+                            <!--<div class="table-responsive">-->
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>

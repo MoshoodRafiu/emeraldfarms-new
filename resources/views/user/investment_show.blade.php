@@ -17,13 +17,13 @@
 @section('content')
     <div class="section-body">
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-sm-12 col-lg-8">
                 <div class="card">
                     <div class="card-header">
                         <h4>Investment Details</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="">
                             <table class="table table-striped" id="table-1">
                                 <thead>
                                 <tr>
