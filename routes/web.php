@@ -177,7 +177,7 @@ Route::post("/loadLongFarm", 'FarmlistController@loadLongFarms');
 Route::post("/loadAllAdmin", 'AdminController@loadAllAdmin');
 Route::get("/transactions/investments/short/{id}/show", 'HomeController@showShortInvestments')->name('short-investment.show');
 Route::get("/admin/transactions/investments/long/{id}/show", 'AdminController@showLongInvestments')->name('admin-long-investment.show');
-Route::get("/transactions/investments/long/{id}/show", 'AdminController@showLongInvestments')->name('long-investment.show.admin');
+//Route::get("/transactions/investments/long/{id}/show", 'AdminController@showLongInvestments')->name('long-investment.show.admin');
 Route::get('/investments/payout/approveNow/{id}', 'AdminController@payMilestone');
 Route::get("/transactions/investments/long/{id}/show", 'HomeController@showLongInvestments')->name('long-investment.show');
 

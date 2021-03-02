@@ -64,7 +64,7 @@ use App\Http\Controllers\Globals as Util;
                                         </td>
 
                                         <td>
-                                            <a href="{{route('long-investment.show.admin', $invest->id)}}" class="btn btn-success">View Investment</a>
+                                            <a href="/admin/transactions/investments/long/{{$invest->id}}/show" class="btn btn-success">View Investment</a>
 
                                         </td>
                                     </tr>
