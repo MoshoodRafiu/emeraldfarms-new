@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Wallet;
+use App\User;
 use App\Notifications\WalletNotification;
 
 class WalletObserver
@@ -26,11 +27,11 @@ class WalletObserver
      */
     public function updated(Wallet $wallet)
     {
-        $user = $wallet->user;
+        $user = User::findOrFail($wallet->user_id);
         if($wallet->isDirty('total_amount')){
             $old_amount = $wallet->getOriginal('total_amount'); 
             $amount = $wallet->total_amount; 
-            $wallet->user->notify(new WalletNotification(explode(' ', $user->name)[0], $old_amount, $amount));
+            $user->notify(new WalletNotification(explode(' ', $user->name)[0], $old_amount, $amount));
         }
     }
 

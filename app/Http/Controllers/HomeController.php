@@ -655,7 +655,7 @@ class HomeController extends Controller
             $content = 'An investment has been created successfully by '.$user->name.'. An investment of N '. number_format($total_amount_returns,2).' under the farmlist titled <big>'.$farmlist->title.'</big>.';
             $button = true;
             $button_text = 'View Investment';
-            $button_link = route('admin.investments');
+            $button_link = route('admin.investments.short');
             $subject = "New Investment Created";
             Mail::to('transactions@emeraldfarms.ng')->send(new SendMailable($title,$name,$content,$button,$button_text,$subject,$button_link));
 

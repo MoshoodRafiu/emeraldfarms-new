@@ -20,7 +20,6 @@ class InvestmentObserver
         if($user){
             $status = $investment->status;
             if($status == 'pending'){
-                $this->payRef($user, $investment);
                 $user->notify(new InvestmentNotification(explode(' ', $user->name)[0], $investment, false, false, false, false, true));
             }elseif($status == 'active') {
                 $user->notify(new InvestmentNotification(explode(' ', $user->name)[0], $investment, false, false, false, true, false));

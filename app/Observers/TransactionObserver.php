@@ -16,7 +16,7 @@ class TransactionObserver
      */
     public function created(Transaction $transaction)
     {
-        $user = $transaction->user;
+        $user = User::findOrFail($transaction->user_id);
         $status = $transaction->status;
         if($user){
             if($status == 'approved'){

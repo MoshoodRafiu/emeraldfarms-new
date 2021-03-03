@@ -55,19 +55,19 @@ class TransactionNotification extends Notification
         if($this->isPending){
             return (new MailMessage)
                     ->greeting('Dear '.ucwords($this->name).',')
-                    ->line('Your <b>'.$this->transaction->data()->description.'</b> transaction of <b>₦'.number_format($this->transaction->data()->amount,2).'</b> with reference <b>'.$this->transaction->data()->reference.'</b> has been saved and pending administrative approval.')
+                    ->line('Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> has been saved and pending administrative approval.')
                     ->line('If you have any complaints or queries, please reach out to our support desk.')
                     ->line('Thank you for trusting us!');
         }elseif($this->isFailed){
             return (new MailMessage)
                     ->greeting('Dear '.ucwords($this->name).',')
-                    ->line('Your <b>'.$this->transaction->data()->description.'</b> transaction of <b>₦'.number_format($this->transaction->data()->amount,2).'</b> with reference <b>'.$this->transaction->data()->reference.'</b> failed.')
+                    ->line('Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> failed.')
                     ->line('If you have any complaints or queries, please reach out to our support desk.')
                     ->line('Thank you for trusting us!');
         }elseif($this->isSuccess){
             return (new MailMessage)
                     ->greeting('Dear '.ucwords($this->name).',')
-                    ->line('Your <b>'.$this->transaction->data()->description.'</B> transaction of <b>₦'.number_format($this->transaction->data()->amount,2).'</b> with reference <b>'.$this->transaction->data()->reference.'</b> was successful.')
+                    ->line('Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> was successful.')
                     ->line('If you have any complaints or queries, please reach out to our support desk.')
                     ->line('Thank you for trusting us!');
         }
