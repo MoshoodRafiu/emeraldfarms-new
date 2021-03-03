@@ -47,7 +47,8 @@ class PaidMilestoneNotification extends Notification
         return (new MailMessage)
                     ->greeting('Dear '.ucwords($this->name).',')
                     ->line('You just got a milestone payment of <b>₦'.number_format($this->milestone->amount,2).'</b> for your investment with <b>'.ucwords($this->milestone->investment->farm->title).'</b>')
-                    ->line('Thank you for trusting us!');
+                    ->line('Thank you for trusting us!')
+                    ->view('emails.new_custom');
     }
 
     /**
@@ -59,7 +60,8 @@ class PaidMilestoneNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'body'=>'You just got a milestone payment of <b>₦'.number_format($this->milestone->amount,2).'</b> for your investment with <b>'.ucwords($this->milestone->investment->farm->title).'</b>',
+            'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fab fa-amazon-pay"></i>'
         ];
     }
 }

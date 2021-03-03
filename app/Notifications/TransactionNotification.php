@@ -57,19 +57,22 @@ class TransactionNotification extends Notification
                     ->greeting('Dear '.ucwords($this->name).',')
                     ->line('Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> has been saved and pending administrative approval.')
                     ->line('If you have any complaints or queries, please reach out to our support desk.')
-                    ->line('Thank you for trusting us!');
+                    ->line('Thank you for trusting us!')
+                    ->view('emails.new_custom');
         }elseif($this->isFailed){
             return (new MailMessage)
                     ->greeting('Dear '.ucwords($this->name).',')
                     ->line('Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> failed.')
                     ->line('If you have any complaints or queries, please reach out to our support desk.')
-                    ->line('Thank you for trusting us!');
+                    ->line('Thank you for trusting us!')
+                    ->view('emails.new_custom');
         }elseif($this->isSuccess){
             return (new MailMessage)
                     ->greeting('Dear '.ucwords($this->name).',')
                     ->line('Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> was successful.')
                     ->line('If you have any complaints or queries, please reach out to our support desk.')
-                    ->line('Thank you for trusting us!');
+                    ->line('Thank you for trusting us!')
+                    ->view('emails.new_custom');
         }
         
     }
@@ -82,8 +85,21 @@ class TransactionNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        if($this->isPending){
+            return [
+                'body'=>'Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> has been saved and pending administrative approval.',
+                'icon'=>'<span class="dropdown-item-icon bg-warning text-white"> <i class="fas fa-chart-pie"></i>'
+            ];
+        }elseif($this->isFailed){
+            return [
+                'body'=>'Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> failed.',
+                'icon'=>'<span class="dropdown-item-icon bg-danger text-white"> <i class="fas fa-chart-pie"></i>'
+            ];
+        }elseif($this->isSuccess){
+            return [
+                'body'=>'Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> was successful.',
+                'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fas fa-chart-pie"></i>'
+            ];
+        }
     }
 }

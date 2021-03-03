@@ -230,6 +230,22 @@ Route::group(['middleware' => 'assign.guard:web,/login'],function(){
     Route::post('bookings', 'BookingController@store')->name('bookings.store');
     Route::get('bookings/{booking}/delete', 'BookingController@destroy')->name('bookings.delete');
 
+    Route::get('/notifications', function(){
+        return view('notifications.index');
+    });
+    Route::get('/notifications/{id}', function($id){
+        DB::table('notifications')->where('id', $id)->update(['read_at'=>\Carbon\Carbon::now()]);
+        $notification = DB::table('notifications')->where('id', $id)->first();
+        return view('notifications.show', ['id'=>$id, 'notification'=>$notification]);
+    });
+    Route::get('/notifications/myaction/viewall', function(Request $request){
+        $user = $request->user();
+        $user->unreadNotifications->map(function($n) use($request) {
+            $n->markAsRead();
+        });
+        return redirect()->back();
+    });
+
 });
 
 //Auth::guard('admin')->loginUsingId(2);

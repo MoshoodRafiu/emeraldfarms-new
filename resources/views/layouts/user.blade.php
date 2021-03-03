@@ -50,11 +50,32 @@
                     </li>
                 </ul>
             </div>
-            <ul class="navbar-nav navbar-right d-none d-md-block">
+            <ul class="navbar-nav navbar-right">
+                <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle"><i data-feather="bell"></i>
+                    @if(auth()->user()->unreadNotifications()->count() > 0)
+                    <span class="badge headerBadge1">{{ auth()->user()->unreadNotifications()->count() }}</span> 
+                    @endif </a>
+                    <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
+                        <div class="dropdown-header">
+                            Notifications
+                            <div class="float-right">
+                                <a href="/notifications/myaction/viewall">Mark All As Read</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-list-content dropdown-list-icons">
+                            @forelse(auth()->user()->unreadNotifications as $notification)
+                            <a href="/notifications/{{ $notification->id }}" class="dropdown-item dropdown-item-unread"> {!! $notification->data['icon'] !!} <span class="dropdown-item-desc"> {{ $notification->data['body'] }} <span class="time">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($notification->created_at))->diffForHumans() }}</span></span></a>
+                            @endforeach
+                        </div>
+                        <div class="dropdown-footer text-center">
+                            <a href="/notifications">View All <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </li>
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown"
                        class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{{ Util::getPassport($me) }}"
-                                                                                        class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
+                                                                                        class="user-img-radious-style" style="height: 30px"> <span class="d-sm-none d-lg-inline-block"></span></a>
                     <div class="dropdown-menu dropdown-menu-right pullDown">
                         <div class="dropdown-title">Hello {{ ucwords($me->name) }}</div>
                         <a href="/profile" class="dropdown-item has-icon"> <i class="far

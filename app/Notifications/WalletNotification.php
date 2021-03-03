@@ -48,13 +48,15 @@ class WalletNotification extends Notification
             ->greeting('Dear '.ucwords($this->name).',')
             ->line('Your wallet was debited <b>₦'.number_format($this->old_amount - $this->amount, 2).'</b>')
             ->line('Your new wallet balance is <b>₦'.number_format($this->amount,2).'</b>')
-            ->line('Thank you for using our application!');
+            ->line('Thank you for using our application!')
+            ->view('emails.new_custom');
 
         if($this->old_amount < $this->amount) return (new MailMessage)
             ->greeting('Dear '.ucwords($this->name).',')
             ->line('Your wallet has been credited with <b>₦'.number_format($this->amount-$this->old_amount, 2).'</b>')
             ->line('Your new wallet balance is <b>₦'.number_format($this->amount,2).'</b>')
-            ->line('Thank you for using our application!');
+            ->line('Thank you for using our application!')
+            ->view('emails.new_custom');
     }
 
     /**
@@ -65,8 +67,16 @@ class WalletNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        if($this->old_amount > $this->amount)
+            return [
+                'body'=>'Your wallet was debited <b>₦'.number_format($this->old_amount - $this->amount, 2).'</b> <br>Your new wallet balance is <b>₦'.number_format($this->amount,2).'</b>',
+                'icon'=>'<span class="dropdown-item-icon bg-info text-white"> <i class="fas fa-wallet"></i>'
+            ];
+
+        if($this->old_amount < $this->amount)
+            return [
+                'body'=>'Your wallet has been credited with <b>₦'.number_format($this->amount-$this->old_amount, 2).'</b><br>Your new wallet balance is <b>₦'.number_format($this->amount,2).'</b>',
+                'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fas fa-wallet"></i>'
+            ];
     }
 }
