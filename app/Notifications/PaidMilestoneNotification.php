@@ -33,7 +33,7 @@ class PaidMilestoneNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -61,7 +61,7 @@ class PaidMilestoneNotification extends Notification
     {
         return [
             'body'=>'You just got a milestone payment of <b>₦'.number_format($this->milestone->amount,2).'</b> for your investment with <b>'.ucwords($this->milestone->investment->farm->title).'</b>',
-            'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fab fa-amazon-pay"></i>'
+            'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fab fa-amazon-pay"></i><span>'
         ];
     }
 }

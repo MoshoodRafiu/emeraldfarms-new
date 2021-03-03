@@ -26,7 +26,7 @@
 		<div class="email mb-3">
 			<div class="card">
 				<div class="card-body">
-					<p>{{ json_decode($notification->data)->body}}</p>
+					<p>{!! json_decode($notification->data)->body !!}</p>
 				</div>
 			</div>
 		</div>

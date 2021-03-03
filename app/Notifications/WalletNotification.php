@@ -33,7 +33,7 @@ class WalletNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -76,7 +76,7 @@ class WalletNotification extends Notification
         if($this->old_amount < $this->amount)
             return [
                 'body'=>'Your wallet has been credited with <b>₦'.number_format($this->amount-$this->old_amount, 2).'</b><br>Your new wallet balance is <b>₦'.number_format($this->amount,2).'</b>',
-                'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fas fa-wallet"></i>'
+                'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fas fa-wallet"></i><span>'
             ];
     }
 }

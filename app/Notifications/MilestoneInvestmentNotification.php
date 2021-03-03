@@ -44,7 +44,7 @@ class MilestoneInvestmentNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -105,27 +105,27 @@ class MilestoneInvestmentNotification extends Notification
         if($this->isDeclined){
             return [
                 'body'=>'Your <b>₦'.number_format($this->inv->amount_invested).'</b> purchase of <b>'.$this->inv->units.' units</b> with <b>'.ucwords($this->inv->farm->title).'</b> farm has been declined.',
-                'icon'=>'<span class="dropdown-item-icon bg-danger text-white"> <i class="fas fa-chart-line"></i>'
+                'icon'=>'<span class="dropdown-item-icon bg-danger text-white"> <i class="fas fa-chart-line"></i><span>'
             ];
         }elseif($this->isPaid){
             return [
                 'body'=>'Your <b>₦'.number_format($this->inv->amount_invested).'</b> purchase of <b>'.$this->inv->units.' units</b> with <b>'.ucwords($this->inv->farm->title).'</b> farm has been paid to your wallet.',
-                'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fas fa-chart-line"></i>'
+                'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fas fa-chart-line"></i><span>'
             ];
         }elseif($this->isMatured){
             return [
                 'body'=>'Your <b>₦'.number_format($this->inv->amount_invested).'</b> purchase of <b>'.$this->inv->units.' units</b> with <b>'.ucwords($this->inv->farm->title).'</b> farm has matured for payouts.',
-                'icon'=>'<span class="dropdown-item-icon bg-info text-white"> <i class="fas fa-chart-line"></i>'
+                'icon'=>'<span class="dropdown-item-icon bg-info text-white"> <i class="fas fa-chart-line"></i><span>'
             ];
         }elseif($this->isActive){
             return [
                 'body'=>'Your <b>₦'.number_format($this->inv->amount_invested).'</b> purchase of <b>'.$this->inv->units.' units</b> with <b>'.ucwords($this->inv->farm->title).'</b> farm is now active.',
-                'icon'=>'<span class="dropdown-item-icon bg-primary text-white"> <i class="fas fa-chart-line"></i>'
+                'icon'=>'<span class="dropdown-item-icon bg-primary text-white"> <i class="fas fa-chart-line"></i><span>'
             ];
         }elseif($this->isPending){
             return [
                 'body'=>'Your <b>₦'.number_format($this->inv->amount_invested).'</b> purchase of <b>'.$this->inv->units.' units</b> with <b>'.ucwords($this->inv->farm->title).'</b> farm is successful.',
-                'icon'=>'<span class="dropdown-item-icon bg-warning text-white"> <i class="fas fa-chart-line"></i>'
+                'icon'=>'<span class="dropdown-item-icon bg-warning text-white"> <i class="fas fa-chart-line"></i><span>'
             ];
         }
     }
