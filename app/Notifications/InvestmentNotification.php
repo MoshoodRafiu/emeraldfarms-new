@@ -105,27 +105,32 @@ class InvestmentNotification extends Notification
         if($this->isDeclined){
             return [
                 'body'=>'Your ₦'.number_format($this->inv->amount_invested).' purchase of '.$this->inv->units.' units with '.ucwords($this->inv->farm->title).' farm has been declined.',
-                'icon'=>'<span class="dropdown-item-icon bg-danger text-white"> <i class="fas fa-chart-line"></i></span>'
+                'icon'=>'<span class="dropdown-item-icon bg-danger text-white"> <i class="fas fa-chart-line"></i></span>',
+                'title'=>'Investment Declined'
             ];
         }elseif($this->isPaid){
             return [
                 'body'=>'Your ₦'.number_format($this->inv->amount_invested).' purchase of '.$this->inv->units.' units with '.ucwords($this->inv->farm->title).' farm has been paid to your wallet.',
-                'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fas fa-chart-line"></i></span>'
+                'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fas fa-chart-line"></i></span>',
+                'title'=>'Investment Paid'
             ];
         }elseif($this->isMatured){
             return [
                 'body'=>'Your ₦'.number_format($this->inv->amount_invested).' purchase of '.$this->inv->units.' units with '.ucwords($this->inv->farm->title).' farm has matured for payouts.',
-                'icon'=>'<span class="dropdown-item-icon bg-info text-white"> <i class="fas fa-chart-line"></i></span>'
+                'icon'=>'<span class="dropdown-item-icon bg-info text-white"> <i class="fas fa-chart-line"></i></span>',
+                'title'=>'Investment Matured'
             ];
         }elseif($this->isActive){
             return [
                 'body'=>'Your ₦'.number_format($this->inv->amount_invested).' purchase of '.$this->inv->units.' units with '.ucwords($this->inv->farm->title).' farm is now active.',
-                'icon'=>'<span class="dropdown-item-icon bg-primary text-white"> <i class="fas fa-chart-line"></i></span>'
+                'icon'=>'<span class="dropdown-item-icon bg-primary text-white"> <i class="fas fa-chart-line"></i></span>',
+                'title'=>'Investment Approved'
             ];
         }elseif($this->isPending){
             return [
                 'body'=>'Your ₦'.number_format($this->inv->amount_invested).' purchase of '.$this->inv->units.' units with '.ucwords($this->inv->farm->title).' farm is successful.',
-                'icon'=>'<span class="dropdown-item-icon bg-warning text-white"> <i class="fas fa-chart-line"></i></span>'
+                'icon'=>'<span class="dropdown-item-icon bg-warning text-white"> <i class="fas fa-chart-line"></i></span>',
+                'title'=>'Investment Created'
             ];
         }
         

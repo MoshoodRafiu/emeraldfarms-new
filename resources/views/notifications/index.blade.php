@@ -30,7 +30,7 @@
 						@foreach(auth()->user()->notifications as $entity)
 						<tr>
 							<td>{{ $loop->iteration }}</td>
-							<td>{!! explode('</b>', $entity->data['body'])[0] !!}</td>
+							<td>{!! $entity->data['title'] !!}</td>
 							<td>
 								@if($entity->read_at)
 								<span class="badge badge-success">Read</span>
@@ -38,7 +38,7 @@
 								<span class="badge badge-warning">Unread</span>
 								@endif
 							</td>
-							<td>{{ $entity->created_at ? date('d M, Y h:i A', strtotime($entity->maturity_date)) : '' }}</td>
+							<td>{{ $entity->created_at->format('d M, Y h:i A') }}</td>
 							<td><a class="btn btn-primary" href="/notifications/{{ $entity->id }}"><span> View notification</span></a></td>
 						</tr>
 						@endforeach

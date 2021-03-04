@@ -61,7 +61,8 @@ class PaidMilestoneNotification extends Notification
     {
         return [
             'body'=>'You just got a milestone payment of <b>₦'.number_format($this->milestone->amount,2).'</b> for your investment with <b>'.ucwords($this->milestone->investment->farm->title).'</b>',
-            'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fab fa-amazon-pay"></i><span>'
+            'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fab fa-amazon-pay"></i><span>',
+            'title'=>'Milestone Payment'
         ];
     }
 }

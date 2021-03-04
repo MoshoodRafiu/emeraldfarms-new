@@ -28,7 +28,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($investment->milestoneDates() as $date)
+                                @foreach($investment->milestoneDates() as $key => $date)
 
                                     @if($nextDate == null && $date->gt(now()))
                                         @php $nextDate = $date @endphp
@@ -51,7 +51,7 @@
                                             @if($date->gt(now()))
                                             <span class="badge badge-warning">Not matured</span> 
                                             @else
-                                                @if($investment->payments()->count() >= $loop->iteration)
+                                                @if($investment->payments()->count() >= $key+1)
                                                 <span class="badge badge-success">Paid</span>
                                                 @else
                                                 <span class="badge badge-primary">Pending</span>  

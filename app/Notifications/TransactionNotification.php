@@ -88,17 +88,20 @@ class TransactionNotification extends Notification
         if($this->isPending){
             return [
                 'body'=>'Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> has been saved and pending administrative approval.',
-                'icon'=>'<span class="dropdown-item-icon bg-warning text-white"> <i class="fas fa-chart-pie"></i></span>'
+                'icon'=>'<span class="dropdown-item-icon bg-warning text-white"> <i class="fas fa-chart-pie"></i></span>',
+                'title'=>'Transaction Queued'
             ];
         }elseif($this->isFailed){
             return [
                 'body'=>'Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> failed.',
-                'icon'=>'<span class="dropdown-item-icon bg-danger text-white"> <i class="fas fa-chart-pie"></i></span>'
+                'icon'=>'<span class="dropdown-item-icon bg-danger text-white"> <i class="fas fa-chart-pie"></i></span>',
+                'title'=>'Transaction Failed'
             ];
         }elseif($this->isSuccess){
             return [
                 'body'=>'Your transaction of <b>₦'.number_format($this->transaction->amount,2).'</b> was successful.',
-                'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fas fa-chart-pie"></i></span>'
+                'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fas fa-chart-pie"></i></span>',
+                'title'=>'Transaction Approved'
             ];
         }
     }

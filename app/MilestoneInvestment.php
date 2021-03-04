@@ -27,8 +27,8 @@ class MilestoneInvestment extends Model
         $investmentTenureInDays = $this->getPaymentDurationInDays();
         $timesToPay = ceil($investmentTenureInDays / $this->farm->milestone);
 
-        for ($i = 1; $i <= $timesToPay; $i++){
-            $daysToAdd = $this->farm->milestone * $i;
+        for ($i = 1; $i <= $this->farm->milestone; $i++){
+            $daysToAdd = $timesToPay * $i;
             $dates[] = $this->approved_date->addDays($daysToAdd);
         }
         return $dates;

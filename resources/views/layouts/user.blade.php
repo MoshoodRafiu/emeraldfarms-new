@@ -64,7 +64,15 @@
                         </div>
                         <div class="dropdown-list-content dropdown-list-icons">
                             @forelse(auth()->user()->unreadNotifications as $notification)
-                            <a href="/notifications/{{ $notification->id }}" class="dropdown-item dropdown-item-unread"> {!! $notification->data['icon'] !!} <span class="dropdown-item-desc"> {{ $notification->data['body'] }} <span class="time">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($notification->created_at))->diffForHumans() }}</span></span></a>
+                            <a href="/notifications/{{ $notification->id }}" class="dropdown-item dropdown-item-unread"> 
+                                {!! $notification->data['icon'] !!} 
+                                <span class="dropdown-item-desc"> 
+                                    <b>{{ $notification->data['title'] }}</b> 
+                                    <span class="time">
+                                        {{ \Carbon\Carbon::createFromTimeStamp(strtotime($notification->created_at))->diffForHumans() }}
+                                    </span>
+                                </span>
+                            </a>
                             @endforeach
                         </div>
                         <div class="dropdown-footer text-center">

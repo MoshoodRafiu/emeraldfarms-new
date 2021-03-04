@@ -25,6 +25,9 @@
 	<div class="col-lg-6">
 		<div class="email mb-3">
 			<div class="card">
+				<div class="card-header">
+					<h4>{!! json_decode($notification->data)->title !!}</h4>
+				</div>
 				<div class="card-body">
 					<p>{!! json_decode($notification->data)->body !!}</p>
 				</div>
