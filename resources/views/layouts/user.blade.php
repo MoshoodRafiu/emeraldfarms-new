@@ -64,10 +64,10 @@
                         </div>
                         <div class="dropdown-list-content dropdown-list-icons">
                             @forelse(auth()->user()->unreadNotifications as $notification)
-                            <a href="/notifications/{{ $notification->id }}" class="dropdown-item dropdown-item-unread"> 
+                            <a href="/notifications/{{ $notification->id }}" class="dropdown-item"> 
                                 {!! $notification->data['icon'] !!} 
                                 <span class="dropdown-item-desc"> 
-                                    <b>{{ $notification->data['title'] }}</b> 
+                                    {{ $notification->data['title'] }}
                                     <span class="time">
                                         {{ \Carbon\Carbon::createFromTimeStamp(strtotime($notification->created_at))->diffForHumans() }}
                                     </span>
