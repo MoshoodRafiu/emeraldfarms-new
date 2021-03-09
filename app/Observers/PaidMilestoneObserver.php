@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\PaidMilestone;
+use App\MilestoneInvestment;
 use App\Notifications\PaidMilestoneNotification;
 
 class PaidMilestoneObserver
@@ -15,8 +16,9 @@ class PaidMilestoneObserver
      */
     public function created(PaidMilestone $paidMilestone)
     {
-        $user = $paidMilestone->investment->user;
-        $user->notify(new PaidMilestoneNotification(explode(' ', $user->name)[0], $paidMilestone));
+        $investment = MilestoneInvestment::find($paidMilestone->milestone_investment_id);
+        $user = $investment->user;
+        $user->notify(new PaidMilestoneNotification(explode(' ', $user->name)[0], $paidMilestone, $investment));
     }
 
     /**

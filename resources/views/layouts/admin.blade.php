@@ -1,6 +1,8 @@
 @php
     use App\Http\Controllers\Globals as Util;
+    use App\Http\Controllers\FarmInvoke as Defarm;
     use App\Investment;
+    Defarm::init();
     $me = Util::getAdmin();
     $counts = Investment::where('status','active')->sum('amount_invested');
 @endphp

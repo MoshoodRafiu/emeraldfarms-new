@@ -13,16 +13,18 @@ class PaidMilestoneNotification extends Notification
 
     public $name;
     public $milestone;
+    public $investment;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($name, $milestone)
+    public function __construct($name, $milestone, $investment)
     {
         $this->name = $name;
         $this->milestone = $milestone;
+        $this->investment = $investment;
     }
 
     /**
@@ -46,7 +48,7 @@ class PaidMilestoneNotification extends Notification
     {
         return (new MailMessage)
                     ->greeting('Dear '.ucwords($this->name).',')
-                    ->line('You just got a milestone payment of <b>₦'.number_format($this->milestone->amount,2).'</b> for your investment with <b>'.ucwords($this->milestone->investment->farm->title).'</b>')
+                    ->line('You just got a milestone payment of <b>₦'.number_format($this->milestone->amount,2).'</b> for your investment with <b>'.ucwords($this->investment->farm->title).'</b>')
                     ->line('Thank you for trusting us!')
                     ->view('emails.new_custom');
     }
@@ -60,7 +62,7 @@ class PaidMilestoneNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'body'=>'You just got a milestone payment of <b>₦'.number_format($this->milestone->amount,2).'</b> for your investment with <b>'.ucwords($this->milestone->investment->farm->title).'</b>',
+            'body'=>'You just got a milestone payment of <b>₦'.number_format($this->milestone->amount,2).'</b> for your investment with <b>'.ucwords($this->investment->farm->title).'</b>',
             'icon'=>'<span class="dropdown-item-icon bg-success text-white"> <i class="fab fa-amazon-pay"></i><span>',
             'title'=>'Milestone Payment'
         ];

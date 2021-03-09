@@ -1,5 +1,7 @@
 @php
     use App\Http\Controllers\Globals as Util;
+    use App\Http\Controllers\FarmInvoke as Defarm;
+    Defarm::init();
     $me = Util::getUser();
 
     $wallet = Util::getWallet($me);

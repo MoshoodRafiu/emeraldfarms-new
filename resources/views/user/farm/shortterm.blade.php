@@ -10,7 +10,6 @@ use App\Http\Controllers\Globals as Util;
 <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/datatables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
 <link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-
 <style>
     img{
         box-shadow: 0 5px 15px 0 rgba(105,103,103,0.5);

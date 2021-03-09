@@ -132,7 +132,7 @@ class FarmlistController extends Controller
             });
     }
 
-    public function checkForFarmStartDateAndMarkFarmAsOpen()
+    public static function checkForFarmStartDateAndMarkFarmAsOpen()
     {
         FarmList::whereStatus('pending')->get()
             ->each(function($farm){
